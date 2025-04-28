@@ -27,3 +27,6 @@ fi
 
 #make the scripts file executable
 chmod +x $HOME/.vnc/xstartup $HOME/scripts/*
+
+pkg install neovim git fd python clang nodejs xclipg
+git clone https://github.com/LazyVim/starter ~/.config/nvim
