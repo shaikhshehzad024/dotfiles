@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/sh
+## This file is executed during VNC server
+## startup.
+# Kill any existing window manager (optional)
+pkill fluxbox
+
+# Set display
+export DISPLAY=:1 -geometry 1920x1080
+
+# Start the window manager
+fluxbox &
+
+# Allow VNC connections
+xsetroot -solid gray"

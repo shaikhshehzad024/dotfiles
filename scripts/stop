@@ -1,0 +1,6 @@
+#!/bin/sh
+
+pkill fluxbox
+
+# Kill the VNC session
+vncserver -kill :1
