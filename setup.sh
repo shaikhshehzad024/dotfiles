@@ -30,3 +30,7 @@ chmod +x $HOME/.vnc/xstartup $HOME/scripts/*
 
 pkg install neovim git fd python clang nodejs xclipg
 git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+echo "indent_type = \"Spaces\"
+indent_width = 4
+column_width = 120" > ~/.config/nvim/stylua.toml
