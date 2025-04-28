@@ -13,3 +13,5 @@ if [ "$SHELL" == "/bin/bash" ]; then
     echo "Unsupported shell: $SHELL"
   fi
 }
+eval "$(oh-my-posh --init --shell zsh)"
+eval "$(fzf --zsh)"
