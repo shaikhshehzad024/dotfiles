@@ -41,7 +41,7 @@ fi
 #font config
 
 ## Check if file exists
-if [ -f "$file_path" ]; then
+if [ -f ~/.local/share/fonts ]; then
     echo "File already exists. Skipping download."
 else
     echo "File not found. Downloading..."
