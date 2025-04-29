@@ -1,3 +1,5 @@
+set -e
+
 pkg update && pkg upgrade
 
 # List of packages you want
@@ -47,6 +49,11 @@ else
     echo "File not found. Downloading..."
     wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
 fi
+if [ ! -f ~/.local/share/fonts/FiraCode.zip ]; then
+    echo "FiraCode.zip not found! Cannot unzip."
+    exit 1
+fi
+
 unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
 
