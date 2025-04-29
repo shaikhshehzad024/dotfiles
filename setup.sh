@@ -41,7 +41,7 @@ fi
 #font config
 
 ## Check if file exists
-if [ -f ~/.local/share/fonts ]; then
+if [ -f ~/.local/share/fonts/FiraCode.zip ]; then
     echo "File already exists. Skipping download."
 else
     echo "File not found. Downloading..."
