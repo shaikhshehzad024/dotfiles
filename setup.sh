@@ -39,7 +39,14 @@ else
 fi
 
 #font config
-wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+
+## Check if file exists
+if [ -f "$file_path" ]; then
+    echo "File already exists. Skipping download."
+else
+    echo "File not found. Downloading..."
+    wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+fi
 unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
 
