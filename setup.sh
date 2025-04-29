@@ -10,6 +10,8 @@ fc-cache -fv
 #installing oh-my-zsh and appending the previous .zshrc in the new .zshrc file
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+sleep 2
+
 PRE_OHMYZSH_FILE="$HOME/.zshrc.pre-oh-my-zsh"
 ZSHRC_FILE="$HOME/.zshrc"
 
