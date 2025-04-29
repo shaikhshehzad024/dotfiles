@@ -1,6 +1,40 @@
 pkg update && pkg upgrade
-pkg install x11-repo
-pkg install tigervnc fluxbox clang nodejs python wget zsh curl fzf git fontconfig neovim
+
+# List of packages you want
+packages=(
+    x11-repo
+    tigervnc
+    fluxbox
+    clang
+    nodejs
+    python
+    wget
+    zsh
+    curl
+    fzf
+    git
+    fontconfig
+    neovim
+
+)
+
+# Empty array to collect missing packages
+missing_packages=()
+
+# Check each package
+for pkgname in "${packages[@]}"; do
+    if ! command -v "$pkgname" > /dev/null 2>&1; then
+        missing_packages+=("$pkgname")
+    fi
+done
+
+# If there are any missing packages, install them all at once
+if [ "${#missing_packages[@]}" -gt 0 ]; then
+    echo "Installing missing packages: ${missing_packages[*]}"
+    pkg install -y "${missing_packages[@]}"
+else
+    echo "All packages are already installed."
+fi
 
 #font config
 wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
@@ -9,8 +43,6 @@ fc-cache -fv
 
 #installing oh-my-zsh and appending the previous .zshrc in the new .zshrc file
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-sleep 2
 
 PRE_OHMYZSH_FILE="$HOME/.zshrc.pre-oh-my-zsh"
 ZSHRC_FILE="$HOME/.zshrc"
