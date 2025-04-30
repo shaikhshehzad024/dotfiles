@@ -1,10 +1,9 @@
 set -e
 
 pkg update && pkg upgrade
-
+pkg install x11-repo
 # List of packages you want
 packages=(
-    x11-repo
     tigervnc
     fluxbox
     clang
