@@ -5,7 +5,7 @@
 pkill fluxbox
 
 # Set display
-export DISPLAY=:1 -geometry 1920x1080
+export DISPLAY=:1
 
 # Start the window manager
 fluxbox &
