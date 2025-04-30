@@ -56,14 +56,14 @@ fi
 unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
 
-#installing oh-my-zsh and appending the previous .zshrc in the new .zshrc file
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+echo "indent_type = \"Spaces\"
+indent_width = 4
+column_width = 120" > ~/.config/nvim/stylua.toml
 
 #make the scripts file executable
 chmod +x $HOME/.vnc/xstartup $HOME/scripts/*
 
-git clone https://github.com/LazyVim/starter ~/.config/nvim
+#installing oh-my-zsh and appending the previous .zshrc in the new .zshrc file
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo "indent_type = \"Spaces\"
-indent_width = 4
-column_width = 120" > ~/.config/nvim/stylua.toml
