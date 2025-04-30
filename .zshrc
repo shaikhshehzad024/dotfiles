@@ -1,5 +1,5 @@
 export EDITOR=nvim
-export PATH:$PATH:/scripts
+export PATH=$PATH:$HOME/scripts
 export BROWSER='firefox'
 
 alias fluxmenu="$EDITOR ~/.fluxbox/menu"
