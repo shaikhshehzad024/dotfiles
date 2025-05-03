@@ -1,0 +1,33 @@
+[Default Applications]
+inode/directory=pcmanfm.desktop
+image/png=feh.desktop
+image/jpeg=feh.desktop
+image/gif=feh.desktop
+text/plain=xfce4-terminal.desktop
+text/html=userapp-Firefox-4PI052.desktop
+application/xhtml+xml=userapp-Firefox-4PI052.desktop
+application/pdf=firefox.desktop
+audio/mpeg=mpv.desktop
+audio/x-wav=mpv.desktop
+video/mp4=mpv.desktop
+video/x-matroska=mpv.desktop
+x-scheme-handler/http=userapp-Firefox-4PI052.desktop
+x-scheme-handler/https=userapp-Firefox-4PI052.desktop
+x-scheme-handler/chrome=userapp-Firefox-4PI052.desktop
+application/x-extension-htm=userapp-Firefox-4PI052.desktop
+application/x-extension-html=userapp-Firefox-4PI052.desktop
+application/x-extension-shtml=userapp-Firefox-4PI052.desktop
+application/x-extension-xhtml=userapp-Firefox-4PI052.desktop
+application/x-extension-xht=userapp-Firefox-4PI052.desktop
+
+[Added Associations]
+x-scheme-handler/http=userapp-Firefox-4PI052.desktop;
+x-scheme-handler/https=userapp-Firefox-4PI052.desktop;
+x-scheme-handler/chrome=userapp-Firefox-4PI052.desktop;
+text/html=userapp-Firefox-4PI052.desktop;
+application/x-extension-htm=userapp-Firefox-4PI052.desktop;
+application/x-extension-html=userapp-Firefox-4PI052.desktop;
+application/x-extension-shtml=userapp-Firefox-4PI052.desktop;
+application/xhtml+xml=userapp-Firefox-4PI052.desktop;
+application/x-extension-xhtml=userapp-Firefox-4PI052.desktop;
+application/x-extension-xht=userapp-Firefox-4PI052.desktop;
