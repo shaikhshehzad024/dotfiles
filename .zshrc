@@ -1,107 +1,98 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH="/usr/local/bin:/usr/bin:$PATH"
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git z npm colored-man-pages fzf zsh-autosuggestions zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
+if [ Darwin = `uname` ]; then
+  source $HOME/.profile-macos
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+# SSH_AUTH_SOCK set to GPG to enable using gpgagent as the ssh agent.
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
+autoload -Uz compinit && compinit
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+source "${ZINIT_HOME}/zinit.zsh"
+
+zinit light ohmyzsh/ohmyzsh
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::rust
+zinit snippet OMZP::command-not-found
+
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+source $HOME/.profile
+source $HOME/.config/tmuxinator/tmuxinator.zsh
+
+if [ Linux = `uname` ]; then
+  source $HOME/.profile-linux
+fi
+
+setopt auto_cd
+
+#export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="$PATH:$HOME/Library/flutter/bin"
+
+alias sudo='sudo '
+export LD_LIBRARY_PATH=/usr/local/lib
+
+# Completions
+
+source <(doctl completion zsh)
+
+source <(kubectl completion zsh)
+
+# P10k customizations
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# Fix for password store
+export PASSWORD_STORE_GPG_OPTS='--no-throw-keyids'
+
+export NVM_DIR="$HOME/.nvm"                            # You can change this if you want.
+export NVM_SOURCE="/usr/share/nvm"                     # The AUR package installs it to here.
+[ -s "$NVM_SOURCE/nvm.sh" ] && . "$NVM_SOURCE/nvm.sh"  # Load N
+
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
+
+[ -s "$HOME/.svm/svm.sh" ] && source "$HOME/.svm/svm.sh"
+
+# Capslock command
+alias capslock="sudo killall -USR1 caps2esc"
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    export MOZ_ENABLE_WAYLAND=1
+fi
+
+zle_highlight=('paste:none')
+
+
+export DESKTOP=fluxbox
 alias zshconfig="$EDITOR ~/.zshrc"
-alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
 
 export PATH=$PATH:$HOME/scripts
 export BROWSER='firefox'
@@ -110,10 +101,73 @@ alias fluxmenu='$EDITOR ~/.fluxbox/menu'
 alias mkcd='f() { mkdir -p "$1" && cd "$1"; }; f'
 alias cls='clear'
 alias rzsh='source $HOME/.zshrc'
+start() {
+vncserver -kill :1
+vncserver :1
+}
+stop() {
+  pkill $DESKTOP
+ vncserver -kill :1
+}
 
+packages=(
+  tigervnc
+  fluxbox
+  clang
+  nodejs
+  python
+  wget
+  curl
+  fzf
+  git
+  neovim
+  fd
+  maven
+)
 
-PATH="/data/data/com.termux/files/home/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/data/data/com.termux/files/home/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/data/data/com.termux/files/home/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/data/data/com.termux/files/home/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/data/data/com.termux/files/home/perl5"; export PERL_MM_OPT;
+# Empty array to collect missing packages
+missing_packages=()
+
+# Check each package
+for pkgname in "${packages[@]}"; do
+  if ! command -v "$pkgname" >/dev/null 2>&1; then
+    missing_packages+=("$pkgname")
+  fi
+done
+
+# If there are any missing packages, install them all at once
+if [ "${#missing_packages[@]}" -gt 0 ]; then
+  echo "Installing missing packages: ${missing_packages[*]}"
+  pacman -S "${missing_packages[@]}"
+  pacman -Scc
+else
+  echo "All packages are already installed."
+fi
+
+# Path where LazyVim starter will be installed
+lazyvim_dir="${HOME}/.config/nvim"
+
+# Check if it's already installed
+if [ ! -d "$lazyvim_dir" ] || [ ! -f "${lazyvim_dir}/lazy-lock.json" ]; then
+  echo "LazyVim not found. Installing lazystarter..."
+
+  # Backup existing nvim config if any
+  if [ -d "$lazyvim_dir" ]; then
+    mv "$lazyvim_dir" "${lazyvim_dir}.backup.$(date +%s)"
+    echo "Existing config backed up."
+  fi
+
+  # Clone the LazyVim starter template
+  git clone https://github.com/LazyVim/starter "$lazyvim_dir"
+
+  # Remove .git so it's not a Git repo
+  rm -rf "${lazyvim_dir}/.git"
+
+  echo "LazyVim starter installed successfully!"
+else
+  echo "LazyVim is already installed."
+fi
+
+#make the scripts file executable
+chmod +x $HOME/.vnc/xstartup
+

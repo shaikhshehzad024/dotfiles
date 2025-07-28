@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Kill any existing VNC sessions
-vncserver -kill :1 > /dev/null 2>&1
-
-# Start a new VNC session
-vncserver :1
