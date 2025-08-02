@@ -106,6 +106,12 @@ alias rmf='rm -rf'
 alias cpv='rsync -ah --progress'
 alias tree='tree -C -L 2'
 
+# Fix Home/End keys for weird terminals
+bindkey '\e[1~' beginning-of-line   # Home
+bindkey '\e[4~' end-of-line         # End
+bindkey '\e[H' beginning-of-line    # Alternate Home
+bindkey '\e[F' end-of-line          # Alternate End
+
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
