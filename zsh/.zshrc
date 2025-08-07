@@ -113,7 +113,7 @@ bindkey '\e[H' beginning-of-line    # Alternate Home
 bindkey '\e[F' end-of-line          # Alternate End
 
 # Shell integrations
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 alias zshconfig="$EDITOR ~/.zshrc"
