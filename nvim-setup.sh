@@ -3,7 +3,6 @@ pkg update && pkg upgrade
 # List of packages you want
 packages=(
   clang
-  python
   wget
   fzf
   git

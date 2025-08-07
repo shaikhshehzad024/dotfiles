@@ -56,10 +56,5 @@ fi
 unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts
 fc-cache -fv
 
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-echo "indent_type = \"Spaces\"
-indent_width = 4
-column_width = 120" >~/.config/nvim/stylua.toml
-
 #make the scripts file executable
 chmod +x $HOME/.vnc/xstartup $HOME/scripts/*
